@@ -34,10 +34,10 @@ There are 2 main technologies that SOCs use for threat response:
 
 A really brief summary can be found in the following table:
 
-| Technology | Description                                                                         | Purpose    |
-| ---------- | ----------------------------------------------------------------------------------- | ---------- |
-| SIEM       | Collects data from multiple sources into a central dashboard                        | Monitoring |
-| SOAR       | Automated responses to predefined threats (i.e. blocking an IP when req > 2500/sec) | Response   |
+| Technology | Description                                                                                                                 | Purpose    |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| SIEM       | Provides detailed logs to detect suspicious activities                                                                      | Monitoring |
+| SOAR       | Gathers logs + Provides ways to trigger automated responses to predefined threats (i.e. blocking an IP when req > 2500/sec) | Response   |
 
 These 2 technologies can be used in tandem to continuously monitor and respond to new threats.
 
