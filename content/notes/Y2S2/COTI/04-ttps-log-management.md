@@ -41,13 +41,13 @@ Stands for:
 ## Log Management
 ### Windows Logs
 
-| Log         | Description                            |
-| ----------- | -------------------------------------- |
-| System      | System and service related logs        |
-| Security    | Audit logs & authentication events     |
-| Setup       | Configuration logs                     |
-| Application | Logs from user-installed applications  |
-| Forwarded   | Events forwarded from another computer |
+| Log         | Description                                                                                                  |
+| ----------- | ------------------------------------------------------------------------------------------------------------ |
+| System      | System and service related logs (i.e.: drivers)                                                              |
+| Security    | Authentication events, file and object [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) |
+| Setup       | System installation logs (i.e.: updates)                                                                     |
+| Application | Logs from user-installed applications                                                                        |
+| Forwarded   | Events forwarded from another computer                                                                       |
 ### Linux Logs
 - The lower the value, the higher the severity (inversely proportional)
 ### Firewall Logs
