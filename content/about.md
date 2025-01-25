@@ -16,6 +16,9 @@ through the waterfall of error messages I get when compiling.
 
 ## CTFs
 
+I take part in CTFs under [404Unfound](https://404unfound.com/), or
+[Singapore Students Merger](https://ctftime.org/team/299075/).
+
 I mainly play the following categories (though I’m open to
 trying others):
 
