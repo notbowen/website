@@ -1,19 +1,24 @@
 ---
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
-import { SITE } from "@consts";
+import Avatar from "@components/Avatar.astro";
 ---
 
 <header>
   <Container>
     <div class="flex flex-wrap gap-y-2 justify-between">
       <Link href="/" underline={false}>
-        <div class="font-semibold">
-          {SITE.NAME}
-        </div>
+        <Avatar
+          link="https://avatars.githubusercontent.com/u/85286288"
+          className="w-8 h-8"
+        />
       </Link>
       <nav class="flex gap-1">
         <Link href="/blog"> blog </Link>
+        <span>
+          {` `}
+        </span>
+        <Link href="/education"> education </Link>
         <span>
           {` `}
         </span>
