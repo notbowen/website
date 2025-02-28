@@ -4,7 +4,7 @@ export const SITE: Site = {
         NAME: "Hu Bowen",
         EMAIL: "contact@hubowen.dev",
         NUM_POSTS_ON_HOMEPAGE: 3,
-        NUM_WORKS_ON_HOMEPAGE: 2,
+        NUM_EDUCATIONS_ON_HOMEPAGE: 2,
         NUM_PROJECTS_ON_HOMEPAGE: 3,
 };
 
@@ -18,9 +18,9 @@ export const BLOG: Metadata = {
         DESCRIPTION: "A collection of articles on topics I am passionate about.",
 };
 
-export const WORK: Metadata = {
-        TITLE: "Work",
-        DESCRIPTION: "Where I have worked and what I have done.",
+export const EDUCATION: Metadata = {
+        TITLE: "Education",
+        DESCRIPTION: "Where I have studied at and what I have done.",
 };
 
 export const PROJECTS: Metadata = {

@@ -24,7 +24,7 @@ const alleducation = (await getCollection("education"))
       new Date(b.data.dateStart).valueOf() -
       new Date(a.data.dateStart).valueOf(),
   )
-  .slice(0, SITE.NUM_WORKS_ON_HOMEPAGE);
+  .slice(0, SITE.NUM_EDUCATIONS_ON_HOMEPAGE);
 
 const education = await Promise.all(
   alleducation.map(async (item) => {
@@ -36,42 +36,24 @@ const education = await Promise.all(
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
-      Hi, I'm Nano <span class="text-xl">👋🏻</span>
-    </h4>
+    <h4 class="animate font-semibold text-black dark:text-white">Hu Bowen</h4>
+    <h5 class="animate italic text-sm text-black dark:text-white">
+      Cybersecurity @ Ngee Ann Polytechnic
+    </h5>
     <div class="space-y-16">
       <section>
         <article class="space-y-4">
           <p class="animate">
-            I am a minimal, seo friendly, accessible portfolio and blog for
-            developers. I am an even more lightweight version of my popular
-            theme
-            <Link
-              href="https://github.com/markhorn-dev/astro-sphere"
-              aria-label="Astro Sphere on Github"
-              external
-            >
-              Astro Sphere
-            </Link>. I have a lighthouse scores of 100 across the board for
-            performance, accesibility, best practices and SEO.
+            I am a Year 2 student currently pursing a Diploma in Cybersecurity
+            and Digital Forensics at Ngee Ann Polytechnic. I would consider
+            myself an avid CTF player, though it’s debatable as I am not as
+            chronically online as the rest.
           </p>
           <p class="animate">
-            I come packed with full type safety, a sitemap, an rss feed,
-            markdown and mdx support (use components in your markdown) through
-            astro integrations. I am styled with tailwind and come preconfigured
-            with light, dark and system/os theme preferences out of the box.
-          </p>
-          <p class="animate">
-            Visit
-            <Link
-              href="https://github.com/markhorn-dev/astro-nano"
-              aria-label="Astro Nano on Github"
-              external
-            >
-              Astro Nano on Github
-            </Link>
-            to fork the repository, read the docs or one-click deploy on Vercel or
-            Netlify.
+            If I’m not busy playing CTFs, you can find me tinkering with some
+            random-ahh project that would barely help with my portfolio all
+            while bringing me joy and suffering through the waterfall of error
+            messages I get when compiling.
           </p>
         </article>
       </section>
@@ -79,7 +61,7 @@ const education = await Promise.all(
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">Education</h5>
-          <Link href="/work"> See all educations </Link>
+          <Link href="/education"> See all education </Link>
         </div>
         <ul class="flex flex-col space-y-4">
           {
