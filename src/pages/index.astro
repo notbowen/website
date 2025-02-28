@@ -8,11 +8,6 @@ import Link from "@components/Link.astro";
 import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
 
-const blog = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
-
 const projects = (await getCollection("projects"))
   .filter((project) => !project.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -44,18 +39,47 @@ const education = await Promise.all(
       <section>
         <article class="space-y-4">
           <p class="animate">
-            I am a Year 2 student currently pursing a Diploma in Cybersecurity
-            and Digital Forensics at Ngee Ann Polytechnic. I would consider
-            myself an avid CTF player, though it’s debatable as I am not as
-            chronically online as the rest.
+            I build things, I break things. Part-time
+            <a href="https://github.com/notbowen" class="font-serif"
+              >programmer</a
+            >
+            , part-time
+            <a href="https://ctftime.org/user/137162" class="font-serif">
+              CTF player
+            </a>
+            . Proficient in Python, decent in Rust and C++. Apart from programming,
+            I exploit web challenges in CTFs and do a bit of binary exploitation
+            (pwn) on the side.
           </p>
           <p class="animate">
-            If I’m not busy playing CTFs, you can find me tinkering with some
-            random-ahh project that would barely help with my portfolio all
-            while bringing me joy and suffering through the waterfall of error
-            messages I get when compiling.
+            Currently exploring functional programming with OCaml, but my
+            interests often vary. I believe that both breadth and depth are
+            crucial for innovation — depth fosters mastery while breadth opens
+            up new avenues for creativity by combining different concepts.
+          </p>
+          <p class="animate">
+            Most of my previous endeavours can be found in my
+            <a href="https://github.com/notbowen" class="font-serif">GitHub</a>
+            , and I've pinned some personal favourites in the projects mentioned
+            below.
           </p>
         </article>
+      </section>
+
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h5 class="font-semibold text-black dark:text-white">Projects</h5>
+          <Link href="/projects"> See all projects </Link>
+        </div>
+        <ul class="flex flex-col gap-4">
+          {
+            projects.map((project) => (
+              <li>
+                <ArrowCard entry={project} />
+              </li>
+            ))
+          }
+        </ul>
       </section>
 
       <section class="animate space-y-6">
@@ -83,46 +107,12 @@ const education = await Promise.all(
         </ul>
       </section>
 
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Recent projects
-          </h5>
-          <Link href="/projects"> See all projects </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {
-            projects.map((project) => (
-              <li>
-                <ArrowCard entry={project} />
-              </li>
-            ))
-          }
-        </ul>
-      </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">Latest posts</h5>
-          <Link href="/blog"> See all posts </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {
-            blog.map((post) => (
-              <li>
-                <ArrowCard entry={post} />
-              </li>
-            ))
-          }
-        </ul>
-      </section>
-
       <section class="animate space-y-4">
         <h5 class="font-semibold text-black dark:text-white">Let's Connect</h5>
         <article>
           <p>
-            If you want to get in touch with me about something or just to say
-            hi, reach out on social media or send me an email.
+            For all of you stalkers (and recruiters) out there, feel free to
+            reach out and say hi through these platforms!
           </p>
         </article>
         <ul class="flex flex-wrap gap-2">
