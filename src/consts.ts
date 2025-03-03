@@ -5,7 +5,7 @@ export const SITE: Site = {
         EMAIL: "contact@hubowen.dev",
         NUM_POSTS_ON_HOMEPAGE: 3,
         NUM_EDUCATIONS_ON_HOMEPAGE: 2,
-        NUM_PROJECTS_ON_HOMEPAGE: 3,
+        NUM_PROJECTS_ON_HOMEPAGE: 5,
 };
 
 export const HOME: Metadata = {
