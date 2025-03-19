@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard.astro";
-import BackToPrev from "@components/BackToPrev.astro";
+import BackToHome from "@components/BackToHome.astro";
 import { PROJECTS } from "@consts";
 
 const projects = (await getCollection("projects"))
@@ -14,7 +14,7 @@ const projects = (await getCollection("projects"))
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
-      <BackToPrev>Back</BackToPrev>
+      <BackToHome>Back</BackToHome>
       <div class="animate font-semibold text-black dark:text-white">
         Projects
       </div>
