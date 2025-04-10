@@ -1,0 +1,25 @@
+---
+import Container from "@components/Container.astro";
+import Link from "@components/Link.astro";
+import Avatar from "@components/Avatar.astro";
+---
+
+<header>
+  <Container>
+    <div class="flex flex-wrap gap-y-2 justify-between">
+      <Link href="/" underline={false}>
+        <Avatar
+          link="https://avatars.githubusercontent.com/u/85286288"
+          className="w-8 h-8"
+        />
+      </Link>
+      <nav class="flex gap-1">
+        <Link href="/blog"> blog </Link>
+        <span>
+          {` `}
+        </span>
+        <Link href="/projects"> projects </Link>
+      </nav>
+    </div>
+  </Container>
+</header>
