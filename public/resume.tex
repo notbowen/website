@@ -19,8 +19,8 @@
 \usepackage{fontawesome5} % for using icons
 \usepackage{amsmath} % for math
 \usepackage[
-    pdftitle={John Doe's CV},
-    pdfauthor={John Doe},
+    pdftitle={Bowen's CV},
+    pdfauthor={Hu Bowen},
     pdfcreator={LaTeX with RenderCV},
     colorlinks=true,
     urlcolor=primaryColor
@@ -44,6 +44,7 @@
     \usepackage{lmodern}
 \fi
 
+\usepackage[T1]{fontenc}
 \usepackage{charter}
 
 % Some settings:
@@ -160,163 +161,66 @@
     \sbox\ANDbox{$|$}
 
     \begin{header}
-        \fontsize{25 pt}{25 pt}\selectfont John Doe
+        \fontsize{25 pt}{25 pt}\selectfont Hu Bowen
 
         \vspace{5 pt}
 
         \normalsize
-        \mbox{Your Location}%
+        \mbox{Cybersecurity Student @ Ngee Ann Polytechnic}
+
+        \mbox{Singapore}%
         \kern 5.0 pt%
         \AND%
         \kern 5.0 pt%
-        \mbox{\hrefWithoutArrow{mailto:youremail@yourdomain.com}{youremail@yourdomain.com}}%
+        \mbox{\hrefWithoutArrow{mailto:contact@hubowen.dev}{contact@hubowen.dev}}%
         \kern 5.0 pt%
         \AND%
         \kern 5.0 pt%
-        \mbox{\hrefWithoutArrow{tel:+90-541-999-99-99}{0541 999 99 99}}%
+        \mbox{\hrefWithoutArrow{tel:+65-9628-0052}{(+65) 9628 0052}}%
         \kern 5.0 pt%
         \AND%
         \kern 5.0 pt%
-        \mbox{\hrefWithoutArrow{https://yourwebsite.com/}{yourwebsite.com}}%
+        \mbox{\hrefWithoutArrow{https://hubowen.dev/}{hubowen.dev}}%
+
+        \mbox{\hrefWithoutArrow{https://linkedin.com/in/hubowen}{linkedin.com/in/hubowen}}%
         \kern 5.0 pt%
         \AND%
         \kern 5.0 pt%
-        \mbox{\hrefWithoutArrow{https://linkedin.com/in/yourusername}{linkedin.com/in/yourusername}}%
-        \kern 5.0 pt%
-        \AND%
-        \kern 5.0 pt%
-        \mbox{\hrefWithoutArrow{https://github.com/yourusername}{github.com/yourusername}}%
+        \mbox{\hrefWithoutArrow{https://github.com/notbowen}{github.com/notbowen}}%
     \end{header}
 
     \vspace{5 pt - 0.3 cm}
 
 
-    \section{Welcome to RenderCV!}
-
-
-
-        
-        \begin{onecolentry}
-            \href{https://rendercv.com}{RenderCV} is a LaTeX-based CV/resume version-control and maintenance app. It allows you to create a high-quality CV or resume as a PDF file from a YAML file, with \textbf{Markdown syntax support} and \textbf{complete control over the LaTeX code}.
-        \end{onecolentry}
-
-        \vspace{0.2 cm}
+    \section{Profile}
 
         \begin{onecolentry}
-            The boilerplate content was inspired by \href{https://github.com/dnl-blkv/mcdowell-cv}{Gayle McDowell}.
+            Cybersecurity student seeking a software engineering /
+            cybersecurity internship. Passionate about creating apps to solve
+            problems and hacking into apps to make them more secure. Proficient
+            in multiple modern programming languages such as Rust, Javascript
+            and Python. Proven track record in programming and cybersecurity
+            competitions.
         \end{onecolentry}
 
-
-    
-    \section{Quick Guide}
-
-    \begin{onecolentry}
-        \begin{highlightsforbulletentries}
-
-
-        \item Each section title is arbitrary and each section contains a list of entries.
-
-        \item There are 7 unique entry types: \textit{BulletEntry}, \textit{TextEntry}, \textit{EducationEntry}, \textit{ExperienceEntry}, \textit{NormalEntry}, \textit{PublicationEntry}, and \textit{OneLineEntry}.
-
-        \item Select a section title, pick an entry type, and start writing your section!
-
-        \item \href{https://docs.rendercv.com/user_guide/}{Here}, you can find a comprehensive user guide for RenderCV.
-
-
-        \end{highlightsforbulletentries}
-    \end{onecolentry}
 
     \section{Education}
 
-
-
-        
         \begin{twocolentry}{
-            Sept 2000 – May 2005
+            \textit{Apr 2023 - Present}
         }
-            \textbf{University of Pennsylvania}, BS in Computer Science\end{twocolentry}
+        \textbf{Ngee Ann Polytechnic}, Dip. in Cybersecurity \& Digital Forensics\end{twocolentry}
 
         \vspace{0.10 cm}
         \begin{onecolentry}
             \begin{highlights}
-                \item GPA: 3.9/4.0 (\href{https://example.com}{a link to somewhere})
-                \item \textbf{Coursework:} Computer Architecture, Comparison of Learning Algorithms, Computational Theory
+                \item GPA: 3.97/4.0
+                \item Vice-President of NullSec SIG (Cybersecurity Interest Group)
             \end{highlights}
         \end{onecolentry}
 
 
-
-    
-    \section{Experience}
-
-
-
-        
-        \begin{twocolentry}{
-            June 2005 – Aug 2007
-        }
-            \textbf{Software Engineer}, Apple -- Cupertino, CA\end{twocolentry}
-
-        \vspace{0.10 cm}
-        \begin{onecolentry}
-            \begin{highlights}
-                \item Reduced time to render user buddy lists by 75\% by implementing a prediction algorithm
-                \item Integrated iChat with Spotlight Search by creating a tool to extract metadata from saved chat transcripts and provide metadata to a system-wide search database
-                \item Redesigned chat file format and implemented backward compatibility for search
-            \end{highlights}
-        \end{onecolentry}
-
-
-        \vspace{0.2 cm}
-
-        \begin{twocolentry}{
-            June 2003 – Aug 2003
-        }
-            \textbf{Software Engineer Intern}, Microsoft -- Redmond, WA\end{twocolentry}
-
-        \vspace{0.10 cm}
-        \begin{onecolentry}
-            \begin{highlights}
-                \item Designed a UI for the VS open file switcher (Ctrl-Tab) and extended it to tool windows
-                \item Created a service to provide gradient across VS and VS add-ins, optimizing its performance via caching
-                \item Built an app to compute the similarity of all methods in a codebase, reducing the time from $\mathcal{O}(n^2)$ to $\mathcal{O}(n \log n)$
-                \item Created a test case generation tool that creates random XML docs from XML Schema
-                \item Automated the extraction and processing of large datasets from legacy systems using SQL and Perl scripts
-            \end{highlights}
-        \end{onecolentry}
-
-
-
-    
-    \section{Publications}
-
-
-
-        
-        \begin{samepage}
-            \begin{twocolentry}{
-                Jan 2004
-            }
-                \textbf{3D Finite Element Analysis of No-Insulation Coils}
-            \end{twocolentry}
-
-            \vspace{0.10 cm}
-            
-            \begin{onecolentry}
-                \mbox{Frodo Baggins}, \mbox{\textbf{\textit{John Doe}}}, \mbox{Samwise Gamgee}
-
-                \vspace{0.10 cm}
-                
-        \href{https://doi.org/10.1109/TASC.2023.3340648}{10.1109/TASC.2023.3340648}
-        \end{onecolentry}
-        \end{samepage}
-
-
-    
     \section{Projects}
-
-
-
         
         \begin{twocolentry}{
             \href{https://github.com/sinaatalay/rendercv}{github.com/name/repo}
@@ -367,9 +271,6 @@
 
     
     \section{Technologies}
-
-
-
         
         \begin{onecolentry}
             \textbf{Languages:} C++, C, Java, Objective-C, C\#, SQL, JavaScript
@@ -380,8 +281,6 @@
         \begin{onecolentry}
             \textbf{Technologies:} .NET, Microsoft SQL Server, XCode, Interface Builder
         \end{onecolentry}
-
-
     
 
 \end{document}
