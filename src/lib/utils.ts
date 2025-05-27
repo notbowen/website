@@ -5,12 +5,12 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatDate(date: Date) {
-  return Intl.DateTimeFormat("en-US", {
+export function formatDate(date: Date, long: boolean = true) {
+  return long ? Intl.DateTimeFormat("en-US", {
     month: "short",
     day: "2-digit",
     year: "numeric",
-  }).format(date);
+  }).format(date) : `${date.toLocaleString("default", { month: "short" })} ${date.getFullYear().toString()}`;
 }
 
 export function readingTime(html: string) {
