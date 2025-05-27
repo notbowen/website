@@ -39,10 +39,14 @@ const { Content } = await post.render();
       <div class="animate text-2xl font-semibold text-black dark:text-white">
         {post.data.title}
       </div>
+      <div class="animate flex items-center gap-1.5">
+        <div class="font-base text-sm">
+          #{post.data.tag}
+        </div>
+      </div>
     </div>
     <article class="animate">
       <Content />
     </article>
   </Container>
 </PageLayout>
-

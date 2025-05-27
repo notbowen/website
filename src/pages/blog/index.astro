@@ -6,39 +6,43 @@ import ArrowCard from "@components/ArrowCard.astro";
 import BackToHome from "@components/BackToHome.astro";
 import { BLOG } from "@consts";
 
+const strcmp = (a: string, b: string) => (a > b ? 1 : a < b ? -1 : 0);
+
 const data = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  .sort((a, b) =>
+    strcmp(a.data.title.toLowerCase(), b.data.title.toLowerCase()),
+  );
 
 type Acc = {
-  [year: string]: CollectionEntry<"blog">[];
+  [tag: string]: CollectionEntry<"blog">[];
 };
 
 const posts = data.reduce((acc: Acc, post) => {
-  const year = post.data.date.getFullYear().toString();
-  if (!acc[year]) {
-    acc[year] = [];
+  const tag = post.data.tag;
+  if (!acc[tag]) {
+    acc[tag] = [];
   }
-  acc[year].push(post);
+  acc[tag].push(post);
   return acc;
 }, {});
 
-const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
+const tags = Object.keys(posts).sort(strcmp);
 ---
 
 <PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
   <Container>
-    <div class="space-y-10">
+    <div class="space-y-8">
       <BackToHome> Back </BackToHome>
-      <div class="animate font-semibold text-black dark:text-white">Blog</div>
+      <div class="animate font-semibold text-2xl text-black dark:text-white pt-6">Blog</div>
       <div class="space-y-4">
         {
-          years.map((year) => (
+          tags.map((tag) => (
             <section class="animate space-y-4">
-              <div class="font-semibold text-black dark:text-white">{year}</div>
+              <div class="font-semibold text-black dark:text-white">#{tag}</div>
               <div>
                 <ul class="flex flex-col gap-4">
-                  {posts[year].map((post) => (
+                  {posts[tag].map((post) => (
                     <li>
                       <ArrowCard entry={post} />
                     </li>
