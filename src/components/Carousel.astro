@@ -1,0 +1,188 @@
+<!--- Thanks Cursor :D -->
+---
+import type { CollectionEntry } from 'astro:content';
+import Photo from './Photo.astro';
+
+export interface Props {
+  photos: CollectionEntry<"photos">[];
+}
+
+const { photos } = Astro.props;
+---
+
+<!-- Alpine.js-powered carousel (Alpine for state, Astro for rendering photos) -->
+<div
+  x-data="{
+    current: 1, // Start at first real photo
+    total: $el.querySelectorAll('[data-photo]').length - 2, // Exclude clones
+    transitioning: true,
+    goTo(idx) {
+      this.transitioning = true;
+      this.current = idx;
+    },
+    onTransitionEnd() {
+      // If at the cloned first (right after last real), jump to real first
+      if (this.current === this.total + 1) {
+        this.transitioning = false;
+        this.current = 1;
+      }
+      // If at the cloned last (right before first real), jump to real last
+      if (this.current === 0) {
+        this.transitioning = false;
+        this.current = this.total;
+      }
+    },
+    startX: null,
+    isDragging: false,
+    dragStartX: null,
+    dragEndX: null,
+    onKey(e) {
+      if (e.key === 'ArrowLeft') this.goTo(this.current - 1);
+      if (e.key === 'ArrowRight') this.goTo(this.current + 1);
+    },
+    onTouchStart(e) { this.startX = e.touches[0].clientX; },
+    onTouchEnd(e) {
+      if (this.startX === null) return;
+      const endX = e.changedTouches[0].clientX;
+      if (endX - this.startX > 40) this.goTo(this.current - 1);
+      if (this.startX - endX > 40) this.goTo(this.current + 1);
+      this.startX = null;
+    },
+    onMouseDown(e) {
+      this.isDragging = true;
+      this.dragStartX = e.clientX;
+    },
+    onMouseMove(e) {
+      if (!this.isDragging) return;
+      this.dragEndX = e.clientX;
+    },
+    onMouseUp(e) {
+      if (!this.isDragging || this.dragStartX === null) return;
+      const delta = (this.dragEndX ?? e.clientX) - this.dragStartX;
+      if (delta > 40) this.goTo(this.current - 1);
+      if (delta < -40) this.goTo(this.current + 1);
+      this.isDragging = false;
+      this.dragStartX = null;
+      this.dragEndX = null;
+    },
+    onClick(e) {
+      if (this.isDragging) return;
+      const rect = this.$refs.track.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      if (x < rect.width / 2) this.goTo(this.current - 1);
+      else this.goTo(this.current + 1);
+    },
+    init() {
+      window.addEventListener('keydown', this.onKey.bind(this));
+    }
+  }"
+  x-init="init()"
+  class="relative"
+>
+  <div x-ref="track" class="overflow-hidden rounded-lg">
+    <div
+      class="flex"
+      :class="transitioning ? 'transition-transform duration-500 ease-in-out' : ''"
+      :style="`transform: translateX(-${current * 100}%);`"
+      x-on:transitionend="onTransitionEnd()"
+    >
+      <!-- Clone last photo at the start -->
+      <div class="min-w-full" data-photo
+        x-on:touchstart="onTouchStart($event)"
+        x-on:touchend="onTouchEnd($event)"
+        x-on:mousedown="onMouseDown($event)"
+        x-on:mousemove="onMouseMove($event)"
+        x-on:mouseup="onMouseUp($event)"
+        x-on:mouseleave="onMouseUp($event)"
+        x-on:click="onClick($event)"
+      >
+        <Photo photo={photos[photos.length - 1]} />
+      </div>
+      <!-- Real photos -->
+      {photos.map((photo) => (
+        <div class="min-w-full" data-photo
+          x-on:touchstart="onTouchStart($event)"
+          x-on:touchend="onTouchEnd($event)"
+          x-on:mousedown="onMouseDown($event)"
+          x-on:mousemove="onMouseMove($event)"
+          x-on:mouseup="onMouseUp($event)"
+          x-on:mouseleave="onMouseUp($event)"
+          x-on:click="onClick($event)"
+        >
+          <Photo photo={photo} />
+        </div>
+      ))}
+      <!-- Clone first photo at the end -->
+      <div class="min-w-full" data-photo
+        x-on:touchstart="onTouchStart($event)"
+        x-on:touchend="onTouchEnd($event)"
+        x-on:mousedown="onMouseDown($event)"
+        x-on:mousemove="onMouseMove($event)"
+        x-on:mouseup="onMouseUp($event)"
+        x-on:mouseleave="onMouseUp($event)"
+        x-on:click="onClick($event)"
+      >
+        <Photo photo={photos[0]} />
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress Dots and Arrows -->
+  <div class="absolute bottom-0 right-0 px-2 flex gap-1 z-10 items-center">
+    <!-- Left Button -->
+    <button
+      class="hidden group text-white rounded-md w-8 h-8 md:flex items-center justify-center transition relative"
+      aria-label="Previous photo"
+      x-on:click="goTo(current - 1)"
+      :disabled="total <= 1"
+      tabindex="0"
+      id="carousel-left"
+    >
+      <!-- SVG for '<-' -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        class="size-5 stroke-2 fill-none stroke-current"
+      >
+        <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out" />
+        <polyline points="12 5 5 12 12 19" class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out" />
+      </svg>
+    </button>
+
+    <!-- Progress Dots -->
+    <div class="flex gap-2 p-2 md:p-0">
+      <template x-for="idx in total" :key="idx">
+        <button
+          class="w-2 h-2 rounded-full border border-white transition"
+          :class="current === idx ? 'bg-white' : 'bg-transparent'"
+          :aria-label="'Go to photo ' + idx"
+          x-on:click="goTo(idx)"
+          tabindex="0"
+        ></button>
+      </template>
+    </div>
+
+    <!-- Right Button -->
+    <button
+      class="hidden group text-white rounded-md w-8 h-8 md:flex items-center justify-center transition relative"
+      aria-label="Next photo"
+      x-on:click="goTo(current + 1)"
+      :disabled="total <= 1"
+      tabindex="0"
+      id="carousel-right"
+    >
+      <!-- SVG for '->' -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        class="size-5 stroke-2 fill-none stroke-current"
+      >
+        <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out" />
+        <polyline points="12 5 19 12 12 19" class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Alpine.js CDN for client interactivity -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>

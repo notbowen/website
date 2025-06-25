@@ -43,4 +43,14 @@ const achievements = defineCollection({
     })
 });
 
-export const collections = { blog, education, projects, achievements };
+const photos = defineCollection({
+  type: "content",
+  schema: ({ image }) => z.object({
+    location: z.string(),
+    date: z.coerce.date(),
+    src: image(),
+    showOnHome: z.boolean().optional(),
+  }),
+});
+
+export const collections = { blog, education, projects, achievements, photos };

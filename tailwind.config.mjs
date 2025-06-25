@@ -10,6 +10,9 @@ export default {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
         serif: ["Lora", ...defaultTheme.fontFamily.serif],
       },
+      fontSize: {
+        "2xs": "0.625rem"
+      }
     },
   },
   plugins: [require("@tailwindcss/typography")],

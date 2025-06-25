@@ -1,0 +1,24 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  photo: CollectionEntry<"photos">;
+};
+
+const { photo } = Astro.props;
+---
+
+<div class="relative">
+  <Image
+    src={photo.data.src}
+    alt={photo.data.location}
+    class="rounded-lg border border-black/15 dark:border-white/20 shadow-lg"
+  />
+  <p
+    class="absolute bottom-0 left-0 right-0 px-2 py-1 md:px-2 bg-gradient-to-t from-black/80 to-transparent rounded-lg text-white text-2xs md:text-xs"
+    style="text-shadow: 0 1px 4px rgba(0,0,0,0.8);"
+  >
+    {photo.data.location}
+  </p>
+</div>

@@ -9,6 +9,7 @@ import ExternalLink from "@components/ExternalLink.astro";
 import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
 import { formatDate } from "@lib/utils";
+import Carousel from "@components/Carousel.astro";
 
 const projects = (await getCollection("projects"))
   .filter((project) => !project.data.draft)
@@ -23,18 +24,21 @@ const education = (await getCollection("education"))
   )
   .slice(0, SITE.NUM_EDUCATIONS_ON_HOMEPAGE);
 
-const preprocessed_achievements = (await getCollection("achievements"))
-  .sort(
-    (a, b) => 
-      new Date(b.data.date).valueOf() -
-      new Date(a.data.date).valueOf(),
-  );
+const preprocessed_achievements = (await getCollection("achievements")).sort(
+  (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
+);
 const achievements = await Promise.all(
   preprocessed_achievements.map(async (item) => {
     const { Content } = await item.render();
     return { ...item, Content };
-  })
+  }),
 );
+
+const photos = (await getCollection("photos"))
+  .filter((photo) => photo.data.showOnHome)
+  .sort(
+    (a, b) => new Date(a.data.date).valueOf() - new Date(b.data.date).valueOf(),
+  );
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
@@ -60,10 +64,10 @@ const achievements = await Promise.all(
             (pwn) on the side.
           </p>
           <p class="animate">
-            Currently exploring reinforcement learning and AI, but my
-            interests often vary. I believe that both breadth and depth are
-            crucial for innovation — depth fosters mastery while breadth opens
-            up new avenues for creativity by combining different concepts.
+            Currently exploring reinforcement learning and AI, but my interests
+            often vary. I believe that both breadth and depth are crucial for
+            innovation — depth fosters mastery while breadth opens up new
+            avenues for creativity by combining different concepts.
           </p>
           <p class="animate">
             Most of my previous endeavours can be found in my
@@ -127,7 +131,13 @@ const achievements = await Promise.all(
                   {formatDate(entry.data.date, false)}
                 </div>
                 <div class="font-semibold text-black dark:text-white">
-                  {entry.data.link ? <ExternalLink href={entry.data.link}>{entry.data.title}</ExternalLink> : entry.data.title}
+                  {entry.data.link ? (
+                    <ExternalLink href={entry.data.link}>
+                      {entry.data.title}
+                    </ExternalLink>
+                  ) : (
+                    entry.data.title
+                  )}
                 </div>
                 <div class="text-sm opacity-75">{entry.data.organisation}</div>
                 <article>
@@ -137,6 +147,22 @@ const achievements = await Promise.all(
             ))
           }
         </ul>
+      </section>
+
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h5 class="font-semibold text-black dark:text-white" id="education">
+            Photography
+          </h5>
+        </div>
+        <article>
+          <p>
+            Some time ago, I bought a Sony A6400 on a whim. Here are some images
+            that I took with it. Swipe the images or tap the edges to navigate
+            between them. The arrows work too.
+          </p>
+        </article>
+        <Carousel photos={photos} />
       </section>
 
       <section class="animate space-y-4">
