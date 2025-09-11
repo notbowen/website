@@ -3,18 +3,10 @@ import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
-import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
-import ExternalLink from "@components/ExternalLink.astro";
 import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
-import { formatDate } from "@lib/utils";
 import Carousel from "@components/Carousel.astro";
-
-const projects = (await getCollection("projects"))
-  .filter((project) => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
 
 const education = (await getCollection("education"))
   .sort(
@@ -23,16 +15,6 @@ const education = (await getCollection("education"))
       new Date(a.data.dateStart).valueOf(),
   )
   .slice(0, SITE.NUM_EDUCATIONS_ON_HOMEPAGE);
-
-const preprocessed_achievements = (await getCollection("achievements")).sort(
-  (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
-);
-const achievements = await Promise.all(
-  preprocessed_achievements.map(async (item) => {
-    const { Content } = await item.render();
-    return { ...item, Content };
-  }),
-);
 
 const photos = (await getCollection("photos"))
   .filter((photo) => photo.data.showOnHome)
@@ -73,25 +55,9 @@ const photos = (await getCollection("photos"))
             Most of my previous endeavours can be found in my
             <a href="https://github.com/notbowen" class="font-serif">GitHub</a>
             , and I've pinned some personal favourites in the projects mentioned
-            below.
+            in my <a href="resume.pdf" class="font-serif">resume</a>.
           </p>
         </article>
-      </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">Projects</h5>
-          <Link href="/projects"> See all projects </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {
-            projects.map((project) => (
-              <li>
-                <ArrowCard entry={project} />
-              </li>
-            ))
-          }
-        </ul>
       </section>
 
       <section class="animate space-y-6">
@@ -111,38 +77,6 @@ const photos = (await getCollection("photos"))
                   {entry.data.school}
                 </div>
                 <div class="text-sm opacity-75">{entry.data.degree}</div>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white" id="education">
-            Achievements
-          </h5>
-        </div>
-        <ul class="flex flex-col space-y-4">
-          {
-            achievements.map((entry) => (
-              <li>
-                <div class="text-sm opacity-75">
-                  {formatDate(entry.data.date, false)}
-                </div>
-                <div class="font-semibold text-black dark:text-white">
-                  {entry.data.link ? (
-                    <ExternalLink href={entry.data.link}>
-                      {entry.data.title}
-                    </ExternalLink>
-                  ) : (
-                    entry.data.title
-                  )}
-                </div>
-                <div class="text-sm opacity-75">{entry.data.organisation}</div>
-                <article>
-                  <entry.Content />
-                </article>
               </li>
             ))
           }
