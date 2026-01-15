@@ -6,135 +6,197 @@ import PageLayout from "@layouts/PageLayout.astro";
 import Link from "@components/Link.astro";
 import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
+import ProjectCard from "@components/ProjectCard.astro";
 import Carousel from "@components/Carousel.astro";
 
 const education = (await getCollection("education"))
-  .sort(
-    (a, b) =>
-      new Date(b.data.dateStart).valueOf() -
-      new Date(a.data.dateStart).valueOf(),
-  )
-  .slice(0, SITE.NUM_EDUCATIONS_ON_HOMEPAGE);
+    .sort(
+        (a, b) =>
+            new Date(b.data.dateStart).valueOf() -
+            new Date(a.data.dateStart).valueOf(),
+    )
+    .slice(0, SITE.NUM_EDUCATIONS_ON_HOMEPAGE);
 
 const photos = (await getCollection("photos"))
-  .filter((photo) => photo.data.showOnHome)
-  .sort(
-    (a, b) => new Date(a.data.date).valueOf() - new Date(b.data.date).valueOf(),
-  );
+    .filter((photo) => photo.data.showOnHome)
+    .sort(
+        (a, b) =>
+            new Date(a.data.date).valueOf() - new Date(b.data.date).valueOf(),
+    );
+
+const projects = (await getCollection("projects"))
+    .filter((project) => !project.data.draft)
+    .sort(
+        (a, b) =>
+            new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
+    )
+    .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
-  <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">Hu Bowen</h4>
-    <h5 class="animate italic text-sm text-black dark:text-white">
-      Cybersecurity Intern @ DSTA
-    </h5>
-    <div class="space-y-16">
-      <section>
-        <article class="space-y-4">
-          <p class="animate">
-            I build things, I break things. Part-time
-            <a href="https://github.com/notbowen" class="font-serif"
-              >programmer</a
-            >
-            , part-time
-            <a href="https://ctftime.org/user/137162" class="font-serif">
-              CTF player
-            </a>
-            . Proficient in Python, decent in Rust and C++. Apart from programming,
-            I exploit web challenges in CTFs and do a bit of binary exploitation
-            (pwn) on the side.
-          </p>
-          <p class="animate">
-            Currently exploring reinforcement learning and AI, but my interests
-            often vary. I believe that both breadth and depth are crucial for
-            innovation — depth fosters mastery while breadth opens up new
-            avenues for creativity by combining different concepts.
-          </p>
-          <p class="animate">
-            Most of my previous endeavours can be found in my
-            <a href="https://github.com/notbowen" class="font-serif">GitHub</a>
-            , and I've pinned some personal favourites in the projects mentioned
-            in my <a href="resume.pdf" class="font-serif">resume</a>.
-          </p>
-        </article>
-      </section>
+    <Container>
+        <h4 class="animate font-semibold text-black dark:text-white">
+            Hu Bowen
+        </h4>
+        <h5 class="animate italic text-sm text-black dark:text-white">
+            Cybersecurity Intern @ DSTA
+        </h5>
+        <div class="space-y-16">
+            <section>
+                <article class="space-y-4">
+                    <p class="animate">
+                        I build things, I break things. Part-time
+                        <a href="https://github.com/notbowen" class="font-serif"
+                            >programmer</a
+                        >
+                        , part-time
+                        <a
+                            href="https://ctftime.org/user/137162"
+                            class="font-serif"
+                        >
+                            CTF player
+                        </a>
+                        . Proficient in Python, decent in Rust and C++. Apart from
+                        programming, I attempt web exploitation challenges in CTFs
+                        and do a bit of binary exploitation (pwn) on the side.
+                    </p>
+                    <p class="animate">
+                        Currently exploring hardware and programming languages,
+                        but my interests often vary. I believe that both breadth
+                        and depth are crucial for innovation — depth fosters
+                        mastery while breadth opens up new avenues for
+                        creativity by combining different concepts.
+                    </p>
+                    <p class="animate">
+                        Most of my previous endeavours can be found in my
+                        <a href="https://github.com/notbowen" class="font-serif"
+                            >GitHub</a
+                        >
+                        , and I've pinned some personal favourites in the projects
+                        mentioned in my <a href="resume.pdf" class="font-serif"
+                            >resume</a
+                        >.
+                    </p>
+                </article>
+            </section>
 
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white" id="education">
-            Education
-          </h5>
-        </div>
-        <ul class="flex flex-col space-y-4">
-          {
-            education.map((entry) => (
-              <li>
-                <div class="text-sm opacity-75">
-                  {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-                </div>
-                <div class="font-semibold text-black dark:text-white">
-                  {entry.data.school}
-                </div>
-                <div class="text-sm opacity-75">{entry.data.degree}</div>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white" id="education">
-            Photography
-          </h5>
-        </div>
-        <article>
-          <p>
-            Some time ago, I bought a Sony A6400 on a whim. Here are some images
-            that I took with it. Swipe the images or tap the edges to navigate
-            between them. The arrows work too.
-          </p>
-        </article>
-        <Carousel photos={photos} />
-      </section>
-
-      <section class="animate space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">Let's Connect</h5>
-        <article>
-          <p>
-            For all of you stalkers (and recruiters) out there, feel free to
-            reach out and say hi through these platforms!
-          </p>
-        </article>
-        <ul class="flex flex-wrap gap-2">
-          {
-            SOCIALS.map((SOCIAL) => (
-              <li class="flex align-center gap-x-2 text-nowrap">
-                <Link
-                  href={SOCIAL.HREF}
-                  external
-                  aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
-                  className="flex flex-row items-center"
+            <section class="animate space-y-6">
+                <div
+                    class="flex flex-wrap gap-y-2 items-center justify-between"
                 >
-                  <Icon class="mr-2" name={`mdi:${SOCIAL.ICON}`} />
-                  {SOCIAL.NAME}
-                </Link>{" "}
-              </li>
-            ))
-          }
-          <li class="line-clamp-1">
-            <Link
-              href={`mailto:${SITE.EMAIL}`}
-              aria-label={`Email ${SITE.NAME}`}
-              className="flex flex-row items-center"
-            >
-              <Icon class="mr-2" name="material-symbols:mail" />
-              {SITE.EMAIL}
-            </Link>
-          </li>
-        </ul>
-      </section>
-    </div>
-  </Container>
+                    <h5
+                        class="font-semibold text-black dark:text-white"
+                        id="education"
+                    >
+                        Education
+                    </h5>
+                </div>
+                <ul class="flex flex-col space-y-4">
+                    {
+                        education.map((entry) => (
+                            <li>
+                                <div class="text-sm opacity-75">
+                                    {dateRange(
+                                        entry.data.dateStart,
+                                        entry.data.dateEnd,
+                                    )}
+                                </div>
+                                <div class="font-semibold text-black dark:text-white">
+                                    {entry.data.school}
+                                </div>
+                                <div class="text-sm opacity-75">
+                                    {entry.data.degree}
+                                </div>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </section>
+
+            <section class="animate space-y-6">
+                <div
+                    class="flex flex-wrap gap-y-2 items-center justify-between"
+                >
+                    <h5
+                        class="font-semibold text-black dark:text-white"
+                        id="projects"
+                    >
+                        Projects
+                    </h5>
+                    <Link href="/projects"> See all projects </Link>
+                </div>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {
+                        projects.map((project) => (
+                            <li>
+                                <ProjectCard entry={project} />
+                            </li>
+                        ))
+                    }
+                </ul>
+            </section>
+            <section class="animate space-y-6">
+                <div
+                    class="flex flex-wrap gap-y-2 items-center justify-between"
+                >
+                    <h5
+                        class="font-semibold text-black dark:text-white"
+                        id="education"
+                    >
+                        Photography
+                    </h5>
+                </div>
+                <article>
+                    <p>
+                        Some time ago, I bought a Sony A6400 on a whim. Here are
+                        some images that I took with it. Swipe the images or tap
+                        the edges to navigate between them. The arrows work too.
+                    </p>
+                </article>
+                <Carousel photos={photos} />
+            </section>
+
+            <section class="animate space-y-4">
+                <h5 class="font-semibold text-black dark:text-white">
+                    Let's Connect
+                </h5>
+                <article>
+                    <p>
+                        For all of you stalkers (and recruiters) out there, feel
+                        free to reach out and say hi through these platforms!
+                    </p>
+                </article>
+                <ul class="flex flex-wrap gap-2">
+                    {
+                        SOCIALS.map((SOCIAL) => (
+                            <li class="flex align-center gap-x-2 text-nowrap">
+                                <Link
+                                    href={SOCIAL.HREF}
+                                    external
+                                    aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
+                                    className="flex flex-row items-center"
+                                >
+                                    <Icon
+                                        class="mr-2"
+                                        name={`mdi:${SOCIAL.ICON}`}
+                                    />
+                                    {SOCIAL.NAME}
+                                </Link>{" "}
+                            </li>
+                        ))
+                    }
+                    <li class="line-clamp-1">
+                        <Link
+                            href={`mailto:${SITE.EMAIL}`}
+                            aria-label={`Email ${SITE.NAME}`}
+                            className="flex flex-row items-center"
+                        >
+                            <Icon class="mr-2" name="material-symbols:mail" />
+                            {SITE.EMAIL}
+                        </Link>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </Container>
 </PageLayout>

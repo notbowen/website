@@ -3,6 +3,7 @@ title: "SimpleOS"
 description: "A tiny operating system with a bootloader, kernel, and a snake game in the kernel."
 date: "May 1 2022"
 repoURL: "https://github.com/notbowen/SimpleOS"
+image: "simpleos.png"
 ---
 
 ## About
