@@ -55,4 +55,16 @@ const photos = defineCollection({
   }),
 });
 
-export const collections = { blog, education, projects, achievements, photos };
+const books = defineCollection({
+    type: "content",
+    schema: ({ image }) => z.object({
+        title: z.string(),
+        author: z.string(),
+        status: z.enum(["reading", "completed", "planning"]),
+        link: z.string(),
+        img: image().or(z.string()).optional(),
+        dateRead: z.coerce.date().optional(),
+    }),
+});
+
+export const collections = { blog, education, projects, achievements, photos, books };

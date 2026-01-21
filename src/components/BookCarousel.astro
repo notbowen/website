@@ -1,0 +1,75 @@
+---
+import BookCard from "./BookCard.astro";
+import type { CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    books: CollectionEntry<"books">[];
+}
+
+const { books } = Astro.props;
+---
+
+<div class="relative group">
+    <!-- Left Button -->
+    <button
+        id="scroll-left"
+        class="absolute left-0 top-1/2 -translate-y-1/2 -ml-5 z-10 w-10 h-10 bg-white/70 dark:bg-black/70 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-full shadow-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 disabled:opacity-0 hover:bg-white dark:hover:bg-black hover:scale-110"
+        aria-label="Scroll left"
+    >
+        <Icon
+            name="mdi:chevron-left"
+            class="w-6 h-6 text-black dark:text-white"
+        />
+    </button>
+
+    <!-- Scroll Container -->
+    <div
+        id="book-carousel"
+        class="flex gap-6 overflow-x-auto pb-8 pt-4 px-1 snap-x snap-mandatory scrollbar-hide items-start"
+        style="scrollbar-width: none; -ms-overflow-style: none;"
+    >
+        {
+            books.map((book) => (
+                <div class="snap-start shrink-0">
+                    <BookCard entry={book} />
+                </div>
+            ))
+        }
+    </div>
+
+    <!-- Right Button -->
+    <button
+        id="scroll-right"
+        class="absolute right-0 top-1/2 -translate-y-1/2 -mr-5 z-10 w-10 h-10 bg-white/70 dark:bg-black/70 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-full shadow-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 disabled:opacity-0 hover:bg-white dark:hover:bg-black hover:scale-110"
+        aria-label="Scroll right"
+    >
+        <Icon
+            name="mdi:chevron-right"
+            class="w-6 h-6 text-black dark:text-white"
+        />
+    </button>
+</div>
+
+<style>
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+
+<script>
+    const scrollContainer = document.getElementById("book-carousel");
+    const leftBtn = document.getElementById("scroll-left");
+    const rightBtn = document.getElementById("scroll-right");
+
+    if (scrollContainer && leftBtn && rightBtn) {
+        leftBtn.addEventListener("click", () => {
+            scrollContainer.scrollBy({ left: -300, behavior: "smooth" });
+        });
+
+        rightBtn.addEventListener("click", () => {
+            scrollContainer.scrollBy({ left: 300, behavior: "smooth" });
+        });
+    }
+</script>
