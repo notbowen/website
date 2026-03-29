@@ -21,20 +21,6 @@ const education = defineCollection({
     }),
 });
 
-const projects = defineCollection({
-    type: "content",
-    schema: ({ image }) => z.object({
-        title: z.string(),
-        description: z.string(),
-        date: z.coerce.date(),
-        dateEnd: z.union([z.coerce.date(), z.string()]).optional(),
-        draft: z.boolean().optional(),
-        demoURL: z.string().optional(),
-        repoURL: z.string(),
-        image: image().or(z.string()).optional(),
-    }),
-});
-
 const achievements = defineCollection({
     type: "content",
     schema: z.object({
@@ -67,4 +53,4 @@ const books = defineCollection({
     }),
 });
 
-export const collections = { blog, education, projects, achievements, photos, books };
+export const collections = { blog, education, achievements, photos, books };
