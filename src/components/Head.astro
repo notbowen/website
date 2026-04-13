@@ -64,13 +64,16 @@ const { title, description, image = "/nano.png" } = Astro.props;
 
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
-  document.addEventListener("astro:before-swap", (e) =>
-    [
-      ...(e as TransitionBeforeSwapEvent).newDocument.head.querySelectorAll(
-        "link[as=\"font\"]"
-      ),
-    ].forEach((link) => link.remove())
-  );
+  document.addEventListener("astro:before-swap", (e) => {
+    const event = e as TransitionBeforeSwapEvent;
+    // Remove force-light when navigating away from a page that had it
+    if (!event.newDocument.documentElement.hasAttribute("data-force-light")) {
+      document.documentElement.removeAttribute("data-force-light");
+    }
+    [...event.newDocument.head.querySelectorAll('link[as="font"]')].forEach(
+      (link) => link.remove()
+    );
+  });
 </script>
 
 <script is:inline>
@@ -169,6 +172,11 @@ function toggleTheme(dark) {
   }
 
   function preloadTheme() {
+    if (document.documentElement.hasAttribute("data-force-light")) {
+      toggleTheme(false);
+      return;
+    }
+
     const userTheme = localStorage.theme;
 
     if (userTheme === "light" || userTheme === "dark") {

@@ -1,0 +1,165 @@
+---
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import { Icon } from "astro-icon/components";
+import { parseResume } from "@lib/resume-parser";
+import { RESUME } from "@consts";
+
+const resume = parseResume("src/content/resume.typ");
+---
+
+<PageLayout title={RESUME.TITLE} description={RESUME.DESCRIPTION} forceLight>
+  <Container>
+    <div class="space-y-10">
+      <div class="animate text-center space-y-3">
+        <h1 class="text-3xl font-bold text-black dark:text-white">
+          {resume.name}
+        </h1>
+        <div
+          class="flex flex-wrap justify-center gap-x-3 gap-y-1 text-sm"
+        >
+          {
+            resume.connections.map((conn, i) => (
+              <>
+                {i > 0 && <span class="opacity-50">&bull;</span>}
+                {conn.href ? (
+                  <a
+                    href={conn.href}
+                    class="hover:text-black dark:hover:text-white transition-colors duration-300"
+                  >
+                    {conn.text}
+                  </a>
+                ) : (
+                  <span>{conn.text}</span>
+                )}
+              </>
+            ))
+          }
+        </div>
+        {
+          resume.lastUpdated && (
+            <p class="text-xs opacity-50">
+              Last updated in {resume.lastUpdated}
+            </p>
+          )
+        }
+      </div>
+
+      <div class="animate flex justify-center">
+        <a
+          href="/resume.pdf"
+          download
+          class="inline-flex items-center gap-2 px-4 py-2 text-sm rounded-lg border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-300 text-black dark:text-white"
+        >
+          <Icon name="material-symbols:download" class="size-4" />
+          Download as PDF
+        </a>
+      </div>
+
+      {
+        resume.sections.map((section) => {
+          if (section.type === "text") {
+            return (
+              <section class="animate space-y-4">
+                <h2 class="font-semibold text-black dark:text-white text-lg border-b border-black/10 dark:border-white/10 pb-1">
+                  {section.title}
+                </h2>
+                <p class="font-serif leading-relaxed">{section.content}</p>
+              </section>
+            );
+          }
+
+          if (section.type === "entries") {
+            return (
+              <section class="animate space-y-4">
+                <h2 class="font-semibold text-black dark:text-white text-lg border-b border-black/10 dark:border-white/10 pb-1">
+                  {section.title}
+                </h2>
+                <div class="space-y-5">
+                  {section.entries.map((entry) => (
+                    <div class="space-y-0.5">
+                      <div class="flex justify-between items-start gap-x-4">
+                        <span class="font-semibold text-black dark:text-white">
+                          {entry.link ? (
+                            <a
+                              href={entry.link}
+                              target="_blank"
+                              class="underline underline-offset-2 decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 dark:hover:decoration-white/50 transition-colors duration-300"
+                            >
+                              {entry.title}
+                            </a>
+                          ) : (
+                            entry.title
+                          )}
+                        </span>
+                        <span class="text-sm opacity-75 shrink-0">
+                          {entry.date}
+                        </span>
+                      </div>
+                      {(entry.position || entry.location) && (
+                        <div class="text-sm font-serif italic opacity-85">
+                          {entry.position}
+                          {entry.position && entry.location && " \u2014 "}
+                          {entry.location}
+                        </div>
+                      )}
+                      {entry.summary && (
+                        <p class="text-sm font-serif italic opacity-85">
+                          {entry.summary}
+                        </p>
+                      )}
+                      {entry.highlights.length > 0 && (
+                        <ul class="text-sm font-serif space-y-0.5 ml-4">
+                          {entry.highlights.map((h) => (
+                            <li class="list-disc">{h}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </section>
+            );
+          }
+
+          if (section.type === "list") {
+            return (
+              <section class="animate space-y-4">
+                <h2 class="font-semibold text-black dark:text-white text-lg border-b border-black/10 dark:border-white/10 pb-1">
+                  {section.title}
+                </h2>
+                <ul class="font-serif space-y-1 ml-4">
+                  {section.items.map((item) => (
+                    <li class="list-disc">{item}</li>
+                  ))}
+                </ul>
+              </section>
+            );
+          }
+
+          if (section.type === "skills") {
+            return (
+              <section class="animate space-y-4">
+                <h2 class="font-semibold text-black dark:text-white text-lg border-b border-black/10 dark:border-white/10 pb-1">
+                  {section.title}
+                </h2>
+                <div class="font-serif space-y-1">
+                  {section.skills.map((skill) => (
+                    <p>
+                      <span class="font-semibold text-black dark:text-white">
+                        {skill.category}:
+                      </span>{" "}
+                      {skill.value}
+                    </p>
+                  ))}
+                </div>
+              </section>
+            );
+          }
+
+          return null;
+        })
+      }
+    </div>
+  </Container>
+</PageLayout>

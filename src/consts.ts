@@ -17,6 +17,11 @@ export const BLOG: Metadata = {
         DESCRIPTION: "A collection of articles on topics I am passionate about.",
 };
 
+export const RESUME: Metadata = {
+	TITLE: "Resume",
+	DESCRIPTION: "Hu Bowen's resume.",
+};
+
 export const EDUCATION: Metadata = {
         TITLE: "Education",
         DESCRIPTION: "Where I have studied at and what I have done.",
