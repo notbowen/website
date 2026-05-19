@@ -4,7 +4,7 @@
   name: "Hu Bowen",
   title: "Hu Bowen - CV",
   footer: context { [#emph[Hu Bowen -- #str(here().page())\/#str(counter(page).final().first())]] },
-  top-note: [ #emph[Last updated in Mar 2026] ],
+  top-note: [ #emph[Last updated in May 2026] ],
   locale-catalog-language: "en",
   text-direction: ltr,
   page-size: "us-letter",
@@ -70,8 +70,8 @@
   entries-degree-width: 1cm,
   entries-summary-space-left: 0cm,
   entries-summary-space-above: 0cm,
-  entries-highlights-bullet:  "•" ,
-  entries-highlights-nested-bullet:  "•" ,
+  entries-highlights-bullet: "•",
+  entries-highlights-nested-bullet: "•",
   entries-highlights-space-left: 0.15cm,
   entries-highlights-space-above: 0cm,
   entries-highlights-space-between-items: 0cm,
@@ -180,7 +180,8 @@ A self-driven lifelong learner with a passion for all things computing-related, 
 == Competitions
 
 #regular-entry(
-  strong[National Olympiad in Artificial Intelligence 2026 -- Gold], [Mar 2026],
+  strong[National Olympiad in Artificial Intelligence 2026 -- Gold],
+  [Mar 2026],
   main-column-second-row: [
     #summary[Only Polytechnic student to attain Gold in NOAI 2026]
 
@@ -194,7 +195,8 @@ A self-driven lifelong learner with a passion for all things computing-related, 
 )
 
 #regular-entry(
-  strong[DSTA Brainhack TIL-AI 2025 -- Semi-Finalist], [Jun 2025],
+  strong[DSTA Brainhack TIL-AI 2025 -- Semi-Finalist],
+  [Jun 2025],
   main-column-second-row: [
     #summary[AI competition testing across ASR, CV, NLP and RL]
 
@@ -208,7 +210,8 @@ A self-driven lifelong learner with a passion for all things computing-related, 
 )
 
 #regular-entry(
-  strong[WorldSkills Singapore 2025 (Cyber Security) -- Bronze], [Apr 2025],
+  strong[WorldSkills Singapore 2025 (Cyber Security) -- Bronze],
+  [Apr 2025],
   main-column-second-row: [
     #summary[National cybersecurity competition held over 3 days]
 
