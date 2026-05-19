@@ -15,9 +15,7 @@ const resume = parseResume("src/content/resume.typ");
         <h1 class="text-3xl font-bold text-black dark:text-white">
           {resume.name}
         </h1>
-        <div
-          class="flex flex-wrap justify-center gap-x-3 gap-y-1 text-sm"
-        >
+        <div class="flex flex-wrap justify-center gap-x-3 gap-y-1 text-sm">
           {
             resume.connections.map((conn, i) => (
               <>
@@ -48,7 +46,7 @@ const resume = parseResume("src/content/resume.typ");
       <div class="animate flex justify-center">
         <a
           href="/resume.pdf"
-          download
+          target="_blank"
           class="inline-flex items-center gap-2 px-4 py-2 text-sm rounded-lg border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-300 text-black dark:text-white"
         >
           <Icon name="material-symbols:download" class="size-4" />
