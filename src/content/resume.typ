@@ -114,7 +114,7 @@ A self-driven lifelong learner with a passion for all things computing-related, 
   main-column-second-row: [
     - GPA: 3.98/4.00
 
-    - 11 Module Distinctions
+    - Diploma with Merit (7 module prizes; 3 top in modules)
 
     - DSTA Polytechnic Digital Scholar
 
@@ -161,24 +161,6 @@ A self-driven lifelong learner with a passion for all things computing-related, 
 
 #regular-entry(
   [
-    #strong[#link("https://github.com/notbowen/ponger")[Ponger]]
-
-  ],
-  [
-    Oct 2024 - Dec 2024
-  ],
-  main-column-second-row: [
-    #summary[Discord bot for a cybersecurity community of 80+ members]
-
-    - Wrote a community management Discord bot in Rust using its Serenity library
-
-    - Implemented a custom message reaction API to assign roles to members
-
-  ],
-)
-
-#regular-entry(
-  [
     #strong[#link("https://github.com/notbowen/SimpleOS")[SimpleOS]]
 
   ],
@@ -195,15 +177,47 @@ A self-driven lifelong learner with a passion for all things computing-related, 
   ],
 )
 
-== Awards
+== Competitions
 
-- National Olympiad in Artificial Intelligence 2026 (Gold)
+#regular-entry(
+  strong[National Olympiad in Artificial Intelligence 2026 -- Gold], [Mar 2026],
+  main-column-second-row: [
+    #summary[Only Polytechnic student to attain Gold in NOAI 2026]
 
-- The InfoSecurity Challenge 2025 (Top 1%)
+    - Answered 20 in-depth MCQs on various technical aspects of AI
 
-- Singapore AI CTF 2025 -- Pre-University (Silver)
+    - Wrote a gradient boosting regressor in Python and patched up a PyTorch U-NET implementation
 
-- WorldSkills Singapore 2025 -- Cyber Security (Bronze)
+    - Implemented multi-head scaled dot product attention with PyTorch
+
+  ],
+)
+
+#regular-entry(
+  strong[DSTA Brainhack TIL-AI 2025 -- Semi-Finalist], [Jun 2025],
+  main-column-second-row: [
+    #summary[AI competition testing across ASR, CV, NLP and RL]
+
+    - Fine-tuned a YOLOv11 model with augmentations for better accuracy
+
+    - Implemented batching and `torch.compile` to improve speeds
+
+    - Trained a reinforcement learning agent to solve a Pacman-like game with Proximal Policy Optimization (PPO)
+
+  ],
+)
+
+#regular-entry(
+  strong[WorldSkills Singapore 2025 (Cyber Security) -- Bronze], [Apr 2025],
+  main-column-second-row: [
+    #summary[National cybersecurity competition held over 3 days]
+
+    - Configured Cisco firewalls to isolate a cloud environment from the internet
+
+    - Only competitor to successfully hack into a vulnerable website, placing us in first place for that component
+
+  ],
+)
 
 == Skills
 
