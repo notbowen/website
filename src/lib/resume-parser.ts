@@ -143,6 +143,8 @@ function parseEntry(block: string): Entry {
         position = parts[0];
       }
     }
+  } else {
+    title = cleanText(titleRow);
   }
 
   let degree: string | undefined;
