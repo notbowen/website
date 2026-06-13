@@ -1,5 +1,7 @@
 ---
-location: "Katase-Enoshima, Fujisawa, Japan"
+location: "Katase-Enoshima"
+city: "Fujisawa"
+country: "Japan"
 date: "02 Oct 2024"
 src: "./enoshima-bus.jpg"
 showOnHome: true

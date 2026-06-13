@@ -22,6 +22,11 @@ export const RESUME: Metadata = {
 	DESCRIPTION: "Hu Bowen's resume.",
 };
 
+export const PHOTOS: Metadata = {
+        TITLE: "Photos",
+        DESCRIPTION: "Photographs taken by Bowen.",
+};
+
 export const EDUCATION: Metadata = {
         TITLE: "Education",
         DESCRIPTION: "Where I have studied at and what I have done.",

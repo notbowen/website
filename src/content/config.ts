@@ -35,6 +35,8 @@ const photos = defineCollection({
   type: "content",
   schema: ({ image }) => z.object({
     location: z.string(),
+    city: z.string(),
+    country: z.string(),
     date: z.coerce.date(),
     src: image(),
     showOnHome: z.boolean().optional(),
